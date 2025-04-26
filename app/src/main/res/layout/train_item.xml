@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.394">
+
+        <TextView
+            android:id="@+id/trainName"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:text="Train Name"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Direction" />
+
+        <TextView
+            android:id="@+id/tunisTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tunis Time" />
+        <TextView
+            android:id="@+id/saiidaTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saidda Manoubia Time Time" />
+        <TextView
+            android:id="@+id/mellassineTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mellassine Time" />
+        <TextView
+            android:id="@+id/erraoudhaTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Erraoudha Time" />
+        <TextView
+            android:id="@+id/leBardoTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Le Bardo Time" />
+        <TextView
+            android:id="@+id/elBortalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="El Bortal Time" />
+        <TextView
+            android:id="@+id/manoubaTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manouba Time" />
+        <TextView
+            android:id="@+id/lesOrangersTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Les Orangers Time" />
+        <TextView
+            android:id="@+id/gobaaTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gobaa Time" />
+        <TextView
+            android:id="@+id/gobaaVilleTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gobaa Ville Time" />
+        <!-- Add more TextViews for stations -->
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
