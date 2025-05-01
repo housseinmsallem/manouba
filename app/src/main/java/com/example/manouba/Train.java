@@ -16,6 +16,21 @@ public class Train {
     public Number getId() {
         return id;
     }
+    public String getDestination(){
+        if(this.direction.equalsIgnoreCase("Allez")){
+            return "Gobaa Ville";
+        }else{
+            return "Tunis";
+        }
+
+    }    public String getTerminus(){
+        if(this.direction.equalsIgnoreCase("Allez")){
+            return "GobaaVille";
+        }else{
+            return "Tunis";
+        }
+
+    }
 
     public String getDirection() {
         return direction;
@@ -107,8 +122,20 @@ public class Train {
         this.gobaaVille = gobaaVille;
     }
 
+    public String getTimeForStation(String station) {
+        switch (station) {
+            case "Tunis": return getTunis();
+            case "SaiidaManoubia": return getSaiidaManoubia();
+            case "Mellassine": return getMellassine();
+            case "Erraoudha": return getErraoudha();
+            case "LeBardo": return getLeBardo();
+            case "ElBortal": return getElBortal();
+            case "Manouba": return getManouba();
+            case "LesOrangers": return getLesOrangers();
+            case "Gobaa": return getGobaa();
+            case "GobaaVille": return getGobaaVille();
+            default: return null;
+        }
+    }
 
-    // add other stations...
-
-    // getters and setters for each
 }
