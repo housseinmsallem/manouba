@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Finish LoginActivity to remove it from the back stack
                             finish();
                         } else {
-                            // If login fails, show an error message
+                            // If login fails, show an error messag
                             Toast.makeText(LoginActivity.this, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
