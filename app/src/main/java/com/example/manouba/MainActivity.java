@@ -1,15 +1,14 @@
 package com.example.manouba;
 
+import android.Manifest;
 import android.content.pm.PackageManager;
-
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-
-import android.Manifest;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -19,6 +18,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TrainDatabaseHelper databaseHelper;
     private FusedLocationProviderClient fusedLocationClient;
     private List<Train> trainList;
+    private Button navHome, navLocation, navTickets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,21 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        // Initialize navigation buttons
+        navHome = findViewById(R.id.nav_home);
+        navLocation = findViewById(R.id.nav_location);
+        navTickets = findViewById(R.id.nav_tickets);
+
+        // Set up navigation button listeners
+        navHome.setOnClickListener(v -> {
+            showHomeContent();
+            Toast.makeText(MainActivity.this, "Home page loaded", Toast.LENGTH_SHORT).show();
+        });
+
+        navLocation.setOnClickListener(v -> loadFragment(new LocationFragment()));
+        navTickets.setOnClickListener(v -> loadFragment(new TicketFragment()));
+
+        // Initialize location services
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Request location permission if not granted
@@ -59,6 +78,30 @@ public class MainActivity extends AppCompatActivity {
         // Load train data
         databaseHelper = new TrainDatabaseHelper(this);
         trainList = databaseHelper.getAllTrains();
+
+        // Show home content by default
+        showHomeContent();
+    }
+
+    private void showHomeContent() {
+        // Make the train info views visible
+        findViewById(R.id.trainInfoCard).setVisibility(View.VISIBLE);
+        // Hide any fragments that might be visible
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new Fragment())
+                .commit();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // Hide the train info views when showing fragments
+        findViewById(R.id.trainInfoCard).setVisibility(View.GONE);
+        findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null) // Optional: allows back button navigation
+                .commit();
     }
 
     private void getLocationAndShowTrain() {
@@ -73,13 +116,11 @@ public class MainActivity extends AppCompatActivity {
                 .addOnSuccessListener(this, location -> {
                     if (location != null) {
                         String nearestStation = getNearestStation(location.getLatitude(), location.getLongitude());
-                        Map<String, Train> nextTrain = getNextTrainsFromNearestStation(location.getLatitude(),location.getLongitude());
+                        Map<String, Train> nextTrain = getNextTrainsFromNearestStation(location.getLatitude(), location.getLongitude());
                         updateUI(nearestStation, nextTrain);
                         Log.d("LOCATION_DEBUG", "Lat: " + location.getLatitude() + ", Lon: " + location.getLongitude());
-
                     } else {
                         updateUI("Unknown", null);
-
                     }
                 });
     }
@@ -225,7 +266,6 @@ public class MainActivity extends AppCompatActivity {
                     departureTimeText.setText(retourTime);
                     departureStationText.setText(station);
                     arrivalStationText.setText(retourTrain.getDestination());
-
                 }
             } else {
                 infoBuilder.append("No upcoming return trains.");
@@ -245,5 +285,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
