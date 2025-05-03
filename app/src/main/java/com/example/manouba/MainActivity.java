@@ -3,6 +3,7 @@ package com.example.manouba;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,10 @@ import androidx.fragment.app.Fragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.w3c.dom.Text;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +35,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-
+    private String closestStationText;
     private TrainDatabaseHelper databaseHelper;
     private FusedLocationProviderClient fusedLocationClient;
     private List<Train> trainList;
@@ -74,6 +79,15 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
 
         // Load train data
         databaseHelper = new TrainDatabaseHelper(this);
@@ -157,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 nearest = entry.getKey();
             }
         }
-
+        closestStationText = nearest;
         return nearest;
     }
 
@@ -213,20 +227,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(String station, Map<String, Train> trains) {
-        // Find all needed TextViews from the UI
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        String formattedTime = sdf.format(calendar.getTime());
         Log.d("UPDATEUI_DEBUG", "Trains Object: "+trains.toString());
+
+        TextView departureStation = findViewById(R.id.departureStation);
+        TextView returnDepartureStation = findViewById(R.id.returnDepartureStation);
         TextView departureTimeText = findViewById(R.id.departureText);
         TextView departureStationText = findViewById(R.id.departureStation);
         TextView arrivalStationText = findViewById(R.id.arrivalStation);
-
-
+        TextView arrivalStationTime = findViewById(R.id.arrivalTimeText);
+        TextView closestStation = findViewById(R.id.nearestStationText);
+        TextView currentTime = findViewById(R.id.currentTimeText);
         StringBuilder infoBuilder = new StringBuilder();
         infoBuilder.append("Nearest Station: ").append(station).append("\n\n");
-
+        closestStation.setText(closestStationText);
+        departureStation.setText(closestStationText);
+        returnDepartureStation.setText(closestStationText);
         // Get trains in both directions
         Train allezTrain = trains.get("allez");
         Train retourTrain = trains.get("retour");
-
+        currentTime.setText(formattedTime);
         if (allezTrain != null || retourTrain != null) {
             // Process outbound ("allez") train
             if (allezTrain != null) {
@@ -237,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
 
                 // Update the main train display if we have an outbound train
                 departureTimeText.setText(allezTime);
-                departureStationText.setText(station);
                 arrivalStationText.setText(allezTrain.getDestination());
 
             } else {
@@ -251,6 +272,7 @@ public class MainActivity extends AppCompatActivity {
                         .append(" at ").append(retourTime).append("\n")
                         .append("Destination: ").append(retourTrain.getDestination());
                 // If there's no outbound train but we have a return train, use it for the main display
+                arrivalStationTime.setText(retourTime);
                 if (allezTrain == null) {
                     departureTimeText.setText(retourTime);
                     departureStationText.setText(station);

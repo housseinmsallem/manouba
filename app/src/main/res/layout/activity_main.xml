@@ -140,7 +140,7 @@
                     android:id="@+id/departureText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15:45"
+                    android:text="--:--"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -254,7 +254,7 @@
                     android:id="@+id/arrivalTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="16:10"
+                    android:text="--:--"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -330,8 +330,8 @@
         android:elevation="8dp"
         android:orientation="horizontal"
         android:weightSum="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragment_container">
+        app:layout_constraintBottom_toBottomOf="parent">
+
 
         <Button
             android:id="@+id/nav_home"
