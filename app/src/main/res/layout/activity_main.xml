@@ -47,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/white"
             android:padding="16dp">
 
             <TextView
@@ -106,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/white"
             android:padding="16dp">
 
             <!-- Direction Title -->
@@ -219,6 +221,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/white"
             android:padding="16dp">
 
             <!-- Direction Title -->
@@ -328,7 +331,7 @@
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
->
+        app:layout_constraintTop_toTopOf="@+id/fragment_container">
 
         <Button
             android:id="@+id/nav_home"
