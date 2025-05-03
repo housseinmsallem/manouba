@@ -84,9 +84,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showHomeContent() {
-        // Make the train info views visible
-        findViewById(R.id.trainInfoCard).setVisibility(View.VISIBLE);
-        // Hide any fragments that might be visible
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new Fragment())
                 .commit();
@@ -94,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFragment(Fragment fragment) {
         // Hide the train info views when showing fragments
-        findViewById(R.id.trainInfoCard).setVisibility(View.GONE);
         findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
 
         getSupportFragmentManager()
@@ -219,13 +215,10 @@ public class MainActivity extends AppCompatActivity {
     private void updateUI(String station, Map<String, Train> trains) {
         // Find all needed TextViews from the UI
         Log.d("UPDATEUI_DEBUG", "Trains Object: "+trains.toString());
-        TextView trainInfoText = findViewById(R.id.trainInfoText);
         TextView departureTimeText = findViewById(R.id.departureText);
-        TextView arrivalTimeText = findViewById(R.id.arrivalText);
-        TextView statusText = findViewById(R.id.statusText);
-        TextView departureStationText = findViewById(R.id.departureStationText);
-        TextView arrivalStationText = findViewById(R.id.arrivalStationText);
-        TextView departureTrainText = findViewById(R.id.trainNumberText);
+        TextView departureStationText = findViewById(R.id.departureStation);
+        TextView arrivalStationText = findViewById(R.id.arrivalStation);
+
 
         StringBuilder infoBuilder = new StringBuilder();
         infoBuilder.append("Nearest Station: ").append(station).append("\n\n");
@@ -257,10 +250,6 @@ public class MainActivity extends AppCompatActivity {
                 infoBuilder.append("Return Train: ")
                         .append(" at ").append(retourTime).append("\n")
                         .append("Destination: ").append(retourTrain.getDestination());
-
-                // Only update arrival time if we have a return train
-                arrivalTimeText.setText(retourTime);
-
                 // If there's no outbound train but we have a return train, use it for the main display
                 if (allezTrain == null) {
                     departureTimeText.setText(retourTime);
@@ -271,17 +260,10 @@ public class MainActivity extends AppCompatActivity {
                 infoBuilder.append("No upcoming return trains.");
             }
 
-            // Display combined information in the info text view
-            trainInfoText.setText(infoBuilder.toString());
-        } else {
-            // No trains available in either direction
-            trainInfoText.setText("Nearest Station: " + station + "\nNo upcoming trains available in either direction.");
 
-            // Reset main display elements
+        } else {
+
             departureTimeText.setText("--:--");
-            arrivalTimeText.setText("--:--");
-            statusText.setText("No trains");
-            departureTrainText.setText("No service");
         }
     }
 }
