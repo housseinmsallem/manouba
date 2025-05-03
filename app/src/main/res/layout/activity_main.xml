@@ -163,7 +163,7 @@
         android:background="#FFFFFF"
         android:elevation="8dp"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="4"> <!-- Changed from 3 to 4 -->
 
         <Button
             android:id="@+id/nav_home"
@@ -203,6 +203,20 @@
             android:text="Tickets"
             android:textColor="#333333"
             android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/nav_account"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableTop="@drawable/ic_account"
+            android:gravity="center"
+            android:drawablePadding="4dp"
+            android:text="Account"
+            android:textColor="#333333"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TrainDatabaseHelper databaseHelper;
     private FusedLocationProviderClient fusedLocationClient;
     private List<Train> trainList;
-    private Button navHome, navLocation, navTickets;
+    private Button navHome, navLocation, navTickets, navAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         navHome = findViewById(R.id.nav_home);
         navLocation = findViewById(R.id.nav_location);
         navTickets = findViewById(R.id.nav_tickets);
+        navAccount = findViewById(R.id.nav_account);
 
         // Set up navigation button listeners
         navHome.setOnClickListener(v -> {
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         navLocation.setOnClickListener(v -> loadFragment(new LocationFragment()));
         navTickets.setOnClickListener(v -> loadFragment(new TicketFragment()));
+        navAccount.setOnClickListener(v -> loadFragment(new AccountFragment()));
 
         // Initialize location services
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
