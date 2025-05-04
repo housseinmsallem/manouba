@@ -1,85 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center_horizontal">
+            android:padding="24dp">
 
-            <TextView
+            <!-- Header Section -->
+            <ImageButton
+                android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose Card Type" />
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:src="@drawable/ic_arrow_back"  />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Details"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Card Type Selection -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CARD TYPE"
+                android:textSize="12sp"
+                android:textColor="@color/gray"
+                android:layout_marginBottom="8dp"/>
 
             <RadioGroup
                 android:id="@+id/cardTypeGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
 
-                <RadioButton
-                    android:id="@+id/visaCard"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Visa" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:strokeColor="@color/light_gray"
+                    app:strokeWidth="1dp">
 
-                <RadioButton
-                    android:id="@+id/masterCard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MasterCard" />
+                    <RadioButton
+                        android:id="@+id/visaCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Visa"
+                        android:button="@null"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.card.MaterialCardView>
 
-                <RadioButton
-                    android:id="@+id/jeuneCard"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Jeune e-Dinar" />
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:strokeColor="@color/light_gray"
+                    app:strokeWidth="1dp">
+
+                    <RadioButton
+                        android:id="@+id/masterCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="MasterCard"
+                        android:button="@null"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:strokeColor="@color/light_gray"
+                    app:strokeWidth="1dp">
+
+                    <RadioButton
+                        android:id="@+id/jeuneCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="e-Dinar"
+                        android:button="@null"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:drawablePadding="8dp"/>
+                </com.google.android.material.card.MaterialCardView>
             </RadioGroup>
 
-            <EditText
-                android:id="@+id/passengerName"
+            <!-- Card Details Form -->
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Passenger Full Name"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="16dp"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/colorPrimary">
 
-            <EditText
-                android:id="@+id/cardNumber"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passengerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cardholder Name"
+                    android:inputType="textPersonName"
+                    android:textSize="16sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Card Number"
-                android:inputType="number" />
+                android:layout_marginBottom="16dp"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/colorPrimary">
 
-            <EditText
-                android:id="@+id/expiryDate"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Card Number"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    android:maxLength="16"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Expiry Date (MM/YY)"
-                android:inputType="text" />
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
 
-            <EditText
-                android:id="@+id/cvv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="CVV"
-                android:inputType="numberPassword" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintTextColor="@color/colorPrimary">
 
-            <Button
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/expiryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="MM/YY"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:maxLength="5"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintTextColor="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cvv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CVV"
+                        android:inputType="numberPassword"
+                        android:textSize="16sp"
+                        android:maxLength="3"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Payment Button -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/payNowButton"
                 android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:text="PAY NOW"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconTint="@color/white"
+                app:backgroundTint="@color/colorPrimary"/>
+
+            <!-- Security Info -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Pay Now"
-                android:layout_marginTop="16dp" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="16dp">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Secure payment encrypted"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

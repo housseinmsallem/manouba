@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp">
 
         <!-- Header -->
         <TextView
@@ -17,14 +19,17 @@
             android:text="My Account"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:textColor="@android:color/black"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Logged out view (shown when not authenticated) -->
+        <!-- Logged out view -->
         <LinearLayout
+            android:id="@+id/loggedOutView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
+            android:paddingVertical="40dp"
             android:visibility="gone">
 
             <TextView
@@ -32,161 +37,204 @@
                 android:layout_height="wrap_content"
                 android:text="Please login to view your account"
                 android:textSize="16sp"
-                android:layout_marginBottom="16dp"/>
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="24dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Login"/>
-
+                android:layout_height="48dp"
+                android:text="Login"
+                app:cornerRadius="24dp"
+                app:backgroundTint="@color/colorPrimary"/>
         </LinearLayout>
 
-        <!-- Logged in view (shown when authenticated) -->
+        <!-- Logged in view -->
         <LinearLayout
+            android:id="@+id/loggedInView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Name Section -->
-            <TextView
+            <!-- Profile Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your name"
-                android:layout_marginBottom="4dp"/>
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="24dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/nameText"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:text="Loading..."/>
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/editName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+                    <!-- Name Section -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginBottom="4dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="16dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-            <!-- Email Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:layout_marginBottom="4dp"/>
+                        <TextView
+                            android:id="@+id/nameText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:layout_weight="1"
+                            android:text="Loading..."/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/editName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/emailText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:text="Loading..."/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:alpha="0.1"
+                        android:layout_marginVertical="16dp"/>
 
-                <TextView
-                    android:id="@+id/editEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+                    <!-- Email Section -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginBottom="4dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="16dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-            <!-- Gender Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gender"
-                android:layout_marginBottom="4dp"/>
+                        <TextView
+                            android:id="@+id/emailText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:layout_weight="1"
+                            android:text="Loading..."/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/editEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/genderText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:text="Loading..."/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:alpha="0.1"
+                        android:layout_marginVertical="16dp"/>
 
-                <TextView
-                    android:id="@+id/editGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+                    <!-- Gender Section -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginBottom="4dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="16dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-            <!-- Phone Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phone Number"
-                android:layout_marginBottom="4dp"/>
+                        <TextView
+                            android:id="@+id/genderText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:layout_weight="1"
+                            android:text="Loading..."/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/editGender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/phoneText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:text="Loading..."/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:alpha="0.1"
+                        android:layout_marginVertical="16dp"/>
 
-                <TextView
-                    android:id="@+id/editPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+                    <!-- Phone Section -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phone Number"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginBottom="4dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/phoneText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:layout_weight="1"
+                            android:text="Loading..."/>
+
+                        <TextView
+                            android:id="@+id/editPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPrimary"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Logout Button -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/logoutButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_height="48dp"
                 android:text="Logout"
-                android:layout_marginTop="32dp"/>
+                android:textColor="@android:color/white"
+                app:cornerRadius="8dp"
+                app:backgroundTint="@color/colorPrimary"
+                android:layout_marginTop="16dp"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

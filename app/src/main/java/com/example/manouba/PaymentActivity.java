@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +25,9 @@ public class PaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
+
 
         cardNumberField = findViewById(R.id.cardNumber);
         expiryField = findViewById(R.id.expiryDate);
@@ -84,6 +88,7 @@ public class PaymentActivity extends AppCompatActivity {
     private boolean isValidCardNumber(String cardNumber) {
         return cardNumber.length() == 16 && cardNumber.matches("[0-9]+");
     }
+
 
     // Validate Expiry Date (MM/YY format)
     private boolean isValidExpiryDate(String expiryDate) {

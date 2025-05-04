@@ -1,63 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_ticket_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
+    android:gravity="center_horizontal"
+    android:background="@android:color/white"
+    android:padding="24dp">
+
+    <!-- Header Section -->
+
+
 
     <TextView
         android:id="@+id/tv_ticket_description"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Get your tickets now!"
-        android:textSize="18sp"
-        android:textColor="#000000"
-        android:layout_marginBottom="20dp"/>
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- Ticket Counter -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Number of Tickets"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginBottom="24dp">
 
         <Button
             android:id="@+id/btn_decrease"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:text="-"
+            android:textSize="24sp"
             android:backgroundTint="@color/colorPrimary"
-            android:text="-" />
+            android:stateListAnimator="@null"
+            android:elevation="0dp"/>
 
         <TextView
             android:id="@+id/tv_ticket_count"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="16dp"
             android:text="0"
-            android:textSize="24sp" />
+            android:textSize="28sp"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:textStyle="bold"/>
 
         <Button
-            android:backgroundTint="@color/colorPrimary"
             android:id="@+id/btn_increase"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:text="+" />
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:text="+"
+            android:textSize="24sp"
+            android:backgroundTint="@color/colorPrimary"
+            android:stateListAnimator="@null"
+            android:elevation="0dp"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_total_price"
-        android:layout_width="wrap_content"
+    <!-- Price Summary Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total: 0 TND"
-        android:textSize="18sp"
-        android:layout_marginTop="24dp" />
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        android:layout_marginBottom="32dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_unit_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Price per ticket: 1 Dinar"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="8dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:alpha="0.2"
+                android:layout_marginVertical="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total: 0 TND"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Payment Button -->
     <Button
         android:id="@+id/btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Proceed to Payment"
+        android:textAllCaps="false"
+        android:textSize="16sp"
         android:backgroundTint="@color/colorPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pay"
-        android:layout_marginTop="24dp"/>
+        android:stateListAnimator="@null"/>
+
 </LinearLayout>
