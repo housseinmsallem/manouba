@@ -11,6 +11,7 @@
 
         <Button
             android:id="@+id/proceedToPaymentButton"
+            android:backgroundTint="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Buy Ticket" />

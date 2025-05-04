@@ -75,6 +75,7 @@
                 android:id="@+id/payNowButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Pay Now"
                 android:layout_marginTop="16dp" />
         </LinearLayout>
