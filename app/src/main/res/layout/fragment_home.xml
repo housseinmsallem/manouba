@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/white"
             android:padding="16dp">
 
             <TextView
@@ -39,7 +40,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/nearestStationText"
+                android:id="@+id/closestStationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -88,6 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/white"
             android:padding="16dp">
 
             <!-- Direction Title -->
@@ -120,7 +122,7 @@
                     android:id="@+id/departureText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15:45"
+                    android:text="--:--"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -198,6 +200,7 @@
         app:layout_constraintTop_toBottomOf="@id/mainTrainCard">
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -233,7 +236,7 @@
                     android:id="@+id/arrivalTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="16:10"
+                    android:text="--:--"
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
