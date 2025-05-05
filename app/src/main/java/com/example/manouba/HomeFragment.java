@@ -202,31 +202,38 @@ public class HomeFragment extends Fragment {
         TextView currentTime = view.findViewById(R.id.currentTimeText);
         TextView returnDepartureStation = view.findViewById(R.id.returnDepartureStation);
 
-        closestStation.setText(station);
-        departureStationText.setText(station);
-        returnDepartureStation.setText(station);
-        currentTime.setText(formattedTime);
+        if (closestStation != null) closestStation.setText(station != null ? station : "Unknown");
+        if (departureStationText != null) departureStationText.setText(station != null ? station : "Unknown");
+        if (returnDepartureStation != null) returnDepartureStation.setText(station != null ? station : "Unknown");
+        if (currentTime != null) currentTime.setText(formattedTime);
 
-        Train allezTrain = trains.get("allez");
-        Train retourTrain = trains.get("retour");
+        Train allezTrain = null;
+        Train retourTrain = null;
 
-        if (allezTrain != null) {
+        if (trains != null) {
+            allezTrain = trains.get("allez");
+            retourTrain = trains.get("retour");
+        }
+
+        if (allezTrain != null && departureTimeText != null && arrivalStationText != null) {
             String allezTime = allezTrain.getTimeForStation(station);
-            departureTimeText.setText(allezTime);
+            departureTimeText.setText(allezTime != null ? allezTime : "--:--");
             arrivalStationText.setText(allezTrain.getDestination());
         }
 
-        if (retourTrain != null) {
+        if (retourTrain != null && arrivalStationTime != null) {
             String retourTime = retourTrain.getTimeForStation(station);
-            arrivalStationTime.setText(retourTime);
-            if (allezTrain == null) {
-                departureTimeText.setText(retourTime);
+            arrivalStationTime.setText(retourTime != null ? retourTime : "--:--");
+
+            if (allezTrain == null && departureTimeText != null && arrivalStationText != null) {
+                departureTimeText.setText(retourTime != null ? retourTime : "--:--");
                 arrivalStationText.setText(retourTrain.getDestination());
             }
         }
 
-        if (allezTrain == null && retourTrain == null) {
+        if (allezTrain == null && retourTrain == null && departureTimeText != null) {
             departureTimeText.setText("--:--");
         }
     }
+
 }
